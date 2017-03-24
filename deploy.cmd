@@ -132,4 +132,4 @@ exit /b 1
 endlocal
 echo Finished successfully.
 
-call !NPM_CMD! start
+call :ExecuteCmd !NPM_CMD! start
