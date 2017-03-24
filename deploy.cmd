@@ -132,4 +132,4 @@ exit /b 1
 endlocal
 echo Finished successfully.
 
-call :ExecuteCmd !NPM_CMD! start
+call npm start
