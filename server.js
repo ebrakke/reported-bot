@@ -2,14 +2,14 @@ const restify = require('restify');
 const builder = require('botbuilder');
 
 let server = restify.createServer();
-server.listen(process.env.port, 3978, () => {
+server.listen(process.env.port || 3978, () => {
   console.log(`${server.name} is listening on port ${server.url}`)
 });
 
 
 let connector = new builder.ChatConnector({
   appId: process.env.MICROSOFT_APP_ID,
-  appPassword: process.enc.MICROSOFT_APP_PASSWORD
+  appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
 server.post('/api/messages', connector.listen());
 let intents = new builder.IntentDialog();
@@ -39,7 +39,7 @@ bot.dialog('/profile', [
   }
 ]);
 
-server.get(/.*/, restify.serverStatic({
+server.get(/.*/, restify.serveStatic({
   directory: '.',
   default: 'index.html'
 }));
