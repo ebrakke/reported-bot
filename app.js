@@ -8,8 +8,8 @@ server.listen(3978, () => {
 
 
 let connector = new builder.ChatConnector({
-  appId: '',
-  appPassword: ''
+  appId: process.env.MICROSOFT_APP_ID,
+  appPassword: process.enc.MICROSOFT_APP_PASSWORD
 });
 server.post('/api/messages', connector.listen());
 let intents = new builder.IntentDialog();
