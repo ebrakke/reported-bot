@@ -2,7 +2,7 @@ const restify = require('restify');
 const builder = require('botbuilder');
 
 let server = restify.createServer();
-server.listen(3978, () => {
+server.listen(process.env.port, 3978, () => {
   console.log(`${server.name} is listening on port ${server.url}`)
 });
 
@@ -37,4 +37,9 @@ bot.dialog('/profile', [
     session.userData.name = result.response;
     session.endDialog();
   }
-])
+]);
+
+server.get(/.*/, restify.serverStatic({
+  directory: '.',
+  default: 'index.html'
+}));
